@@ -3,19 +3,19 @@
         {
             "name": "band1",
             "includePath": [
-                "d:\\demo\\band1\\Core\\Inc",
-                "d:\\demo\\band1\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
-                "d:\\demo\\band1\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
-                "d:\\demo\\band1\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
-                "d:\\demo\\band1\\Drivers\\CMSIS\\Include",
-                "d:\\demo\\band1\\Peripheral",
+                "d:\\code_for_progress\\smartcar\\band1\\Core\\Inc",
+                "d:\\code_for_progress\\smartcar\\band1\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
+                "d:\\code_for_progress\\smartcar\\band1\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
+                "d:\\code_for_progress\\smartcar\\band1\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
+                "d:\\code_for_progress\\smartcar\\band1\\Drivers\\CMSIS\\Include",
+                "d:\\code_for_progress\\smartcar\\band1\\Peripheral",
                 "D:\\Keil_v5\\ARM\\ARMCLANG\\include",
                 "D:\\Keil_v5\\ARM\\ARMCLANG\\include\\arm_linux",
                 "D:\\Keil_v5\\ARM\\ARMCLANG\\include\\arm_linux_compat",
                 "D:\\Keil_v5\\ARM\\ARMCLANG\\include\\libcxx",
-                "d:\\demo\\band1\\MDK-ARM",
-                "d:\\demo\\band1\\Core\\Src",
-                "d:\\demo\\band1\\Drivers\\STM32F1xx_HAL_Driver\\Src"
+                "d:\\code_for_progress\\smartcar\\band1\\MDK-ARM",
+                "d:\\code_for_progress\\smartcar\\band1\\Core\\Src",
+                "d:\\code_for_progress\\smartcar\\band1\\Drivers\\STM32F1xx_HAL_Driver\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",
