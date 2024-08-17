@@ -552,6 +552,16 @@
               <FileType>5</FileType>
               <FilePath>..\Peripheral\delay.h</FilePath>
             </File>
+            <File>
+              <FileName>follow.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Peripheral\follow.c</FilePath>
+            </File>
+            <File>
+              <FileName>follow.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Peripheral\follow.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

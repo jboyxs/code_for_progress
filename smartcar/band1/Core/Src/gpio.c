@@ -60,6 +60,14 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(TRIG_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PCPin PCPin PCPin PCPin
+                           PCPin */
+  GPIO_InitStruct.Pin = OUT0_Pin|OUT1_Pin|OUT2_Pin|OUT3_Pin
+                          |OUT4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
 }
 
 /* USER CODE BEGIN 2 */

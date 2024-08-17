@@ -59,6 +59,16 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define TRIG_Pin GPIO_PIN_0
 #define TRIG_GPIO_Port GPIOC
+#define OUT0_Pin GPIO_PIN_1
+#define OUT0_GPIO_Port GPIOC
+#define OUT1_Pin GPIO_PIN_2
+#define OUT1_GPIO_Port GPIOC
+#define OUT2_Pin GPIO_PIN_3
+#define OUT2_GPIO_Port GPIOC
+#define OUT3_Pin GPIO_PIN_4
+#define OUT3_GPIO_Port GPIOC
+#define OUT4_Pin GPIO_PIN_5
+#define OUT4_GPIO_Port GPIOC
 #define ECHO_Pin GPIO_PIN_6
 #define ECHO_GPIO_Port GPIOB
 
