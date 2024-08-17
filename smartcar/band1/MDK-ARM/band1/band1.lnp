@@ -26,6 +26,7 @@
 "band1\range.o"
 "band1\delay.o"
 "band1\follow.o"
+"band1\pid.o"
 --strict --scatter "band1\band1.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
