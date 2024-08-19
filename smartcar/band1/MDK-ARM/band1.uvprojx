@@ -575,6 +575,16 @@
               <FileType>5</FileType>
               <FilePath>..\Peripheral\pid.h</FilePath>
             </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Peripheral\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Peripheral\motor.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
