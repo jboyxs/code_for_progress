@@ -78,6 +78,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			default: break;
 			}
 		}
+		if(htim==&htim7)
+		{
+			
+		}
 	}
 float RANGE_AcquireData(void)
 {

@@ -26,6 +26,8 @@
 /* USER CODE BEGIN Includes */
 #include "oled.h"
 #include "range.h"
+#include "motor.h"
+#include "encoder.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -79,6 +81,8 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 OLED_Init(&hi2c1);
+MOTOR_init();
+ENCODER_init();
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -94,6 +98,9 @@ OLED_Init(&hi2c1);
   MX_TIM4_Init();
   MX_TIM6_Init();
   MX_TIM2_Init();
+  MX_TIM3_Init();
+  MX_TIM5_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
 OLED_Clear();
 OLED_Display_On();

@@ -11,6 +11,7 @@
 
 extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef htim7;
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim);    
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);

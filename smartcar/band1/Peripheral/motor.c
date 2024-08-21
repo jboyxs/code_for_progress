@@ -1,5 +1,11 @@
 #include "motor.h"
-
+void MOTOR_init(void)
+{
+    HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+    HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
+    HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_4);
+}
 
 void MOTOR_Speed(int8_t left_speed, int8_t right_speed)
 {
