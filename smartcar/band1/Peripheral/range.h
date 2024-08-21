@@ -5,14 +5,15 @@
 #include "main.h"
 #include "delay.h"
 #include "oled.h"//先做测试
+#include "tim.h"
 
 #define TRIG_ON HAL_GPIO_WritePin(TRIG_GPIO_Port,TRIG_Pin,GPIO_PIN_SET)
 #define TRIG_OFF HAL_GPIO_WritePin(TRIG_GPIO_Port,TRIG_Pin,GPIO_PIN_RESET) 
 
-extern TIM_HandleTypeDef htim4;
+/*extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim7;
-
+*/
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim);    
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 float RANGE_AcquireData(void);

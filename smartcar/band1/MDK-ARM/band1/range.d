@@ -29,4 +29,4 @@ band1/range.o: ..\Peripheral\range.c ..\Peripheral\range.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim_ex.h \
   ..\Core\Inc\main.h ..\Peripheral\delay.h ..\Peripheral\oled.h \
-  ..\Peripheral\oledfont.h
+  ..\Peripheral\oledfont.h ..\Core\Inc\tim.h
