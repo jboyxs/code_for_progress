@@ -51,6 +51,7 @@
 extern float distances;
 extern  uint8_t c_values;
 extern uint8_t test;
+extern ENCODER measure;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -81,8 +82,6 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 OLED_Init(&hi2c1);
-MOTOR_init();
-ENCODER_init();
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -105,6 +104,8 @@ ENCODER_init();
 OLED_Clear();
 OLED_Display_On();
 HAL_TIM_Base_Start_IT(&htim6);
+MOTOR_init();
+ENCODER_init();
 //OLED_ShowString(0,6,"test",4,0);
 //OLED_ShowString(0,0,"Distance: ",9,0);
   /* USER CODE END 2 */
@@ -120,6 +121,7 @@ HAL_TIM_Base_Start_IT(&htim6);
     OLED_Showdecimal(0,4,RANGE_AcquireData(),2,2,16,0);
     OLED_ShowNum(7,6,test,5,16,0);
     RANGE_Alarm(RANGE_AcquireData());
+    OLED_Showdecimal(60,6,measure.left_speed,2,2,16,0);
   }
   /* USER CODE END 3 */
 }
@@ -164,7 +166,35 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+//中断回调函数
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
 
+
+	if(htim==&htim6)                      //判断是否为TIM3溢出中断
+	{
+		TRIG_OFF;                         //先将超声波模块SR04的发送端TRIG拉低
+		TRIG_ON;                          //再将超声波模块SR04的发送端TRIG拉高，并且持续20ms后再拉低
+		delay_us(20);
+		TRIG_OFF;
+		__HAL_TIM_SET_CAPTUREPOLARITY(&htim4,TIM_CHANNEL_1,TIM_ICPOLARITY_RISING);//设置为上升沿捕获
+		HAL_TIM_IC_Start_IT(&htim4,TIM_CHANNEL_1);//开启定时器输入捕获
+		//d_values=0;
+		//test++;
+
+	}
+	if(htim==&htim7)
+		{
+			test++;
+			measure.ENCODERL_count=__HAL_TIM_GET_COUNTER(&htim5);
+			measure.ENCODERR_count=__HAL_TIM_GET_COUNTER(&htim3);
+			__HAL_TIM_SET_COUNTER(&htim5,0);
+			__HAL_TIM_SET_COUNTER(&htim3,0);
+			measure.left_speed=(float)measure.ENCODERL_count*100/20/11/4;
+			measure.right_speed=(float)measure.ENCODERR_count*100/20/11/4;
+		}
+
+}
 /* USER CODE END 4 */
 
 /**

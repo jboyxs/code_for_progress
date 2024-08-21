@@ -15,7 +15,7 @@ extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim7;
 */
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim);    
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 float RANGE_AcquireData(void);
 void RANGE_Alarm(float distance);//先做测试
 

@@ -26,7 +26,7 @@ uint8_t test=0;
  * 即每隔100ms发送一个20us的高电平脉冲，同时开启定时器4输入捕获并设置为上升沿捕获
  *
  ********************************************************************************************/
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+/*void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 
 
@@ -38,12 +38,22 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		TRIG_OFF;
 		__HAL_TIM_SET_CAPTUREPOLARITY(&htim4,TIM_CHANNEL_1,TIM_ICPOLARITY_RISING);//设置为上升沿捕获
 		HAL_TIM_IC_Start_IT(&htim4,TIM_CHANNEL_1);//开启定时器输入捕获
-		d_values=0;
+		//d_values=0;
 		//test++;
 
 	}
+	if(htim==&htim7)
+		{
+			test++;
+			measure.ENCODERL_count=__HAL_TIM_GET_COUNTER(&htim5);
+			measure.ENCODERR_count=__HAL_TIM_GET_COUNTER(&htim3);
+			__HAL_TIM_SET_COUNTER(&htim5,0);
+			__HAL_TIM_SET_COUNTER(&htim3,0);
+			measure.left_speed=(float)measure.ENCODERL_count*100/20/11/4;
+			measure.right_speed=(float)measure.ENCODERR_count*100/20/11/4;
+		}
 
-}
+}*/
 
 /********************************************************************************************
  * 定时器输入捕获回调函数 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
@@ -55,9 +65,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
  ********************************************************************************************/
 	void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	{
-		test++;
+		//test++;
 		if(htim==&htim4)
-		{
+		{//test++;
 			switch(c_values)
 			{//标志值c_values初始设定值为0，上升沿输入捕获，先执行回调函数执行case(0)中内容
 
@@ -78,10 +88,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			default: break;
 			}
 		}
-		if(htim==&htim7)
-		{
-			
-		}
+		
 	}
 float RANGE_AcquireData(void)
 {
