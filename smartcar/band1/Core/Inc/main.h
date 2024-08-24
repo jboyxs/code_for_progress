@@ -89,6 +89,10 @@ void Error_Handler(void);
 #define BIN1L_GPIO_Port GPIOC
 #define BIN2L_Pin GPIO_PIN_9
 #define BIN2L_GPIO_Port GPIOC
+#define TX_Pin GPIO_PIN_9
+#define TX_GPIO_Port GPIOA
+#define RX_Pin GPIO_PIN_10
+#define RX_GPIO_Port GPIOA
 #define PWMAL_Pin GPIO_PIN_15
 #define PWMAL_GPIO_Port GPIOA
 #define AIN1R_Pin GPIO_PIN_10

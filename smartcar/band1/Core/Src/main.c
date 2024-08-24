@@ -18,8 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "i2c.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -28,6 +30,7 @@
 #include "range.h"
 #include "motor.h"
 #include "encoder.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,6 +96,7 @@ OLED_Init(&hi2c1);
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_I2C1_Init();
   MX_TIM4_Init();
   MX_TIM6_Init();
@@ -100,6 +104,7 @@ OLED_Init(&hi2c1);
   MX_TIM3_Init();
   MX_TIM5_Init();
   MX_TIM7_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 OLED_Clear();
 OLED_Display_On();
@@ -174,11 +179,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim==&htim6)                      //判断是否为TIM3溢出中断
 	{
 		TRIG_OFF;                         //先将超声波模块SR04的发送端TRIG拉低
-		TRIG_ON;                          //再将超声波模块SR04的发送端TRIG拉高，并且持续20ms后再拉低
+		TRIG_ON;                          //再将超声波模块SR04的发送端TRIG拉高，并且持�??20ms后再拉低
 		delay_us(20);
 		TRIG_OFF;
 		__HAL_TIM_SET_CAPTUREPOLARITY(&htim4,TIM_CHANNEL_1,TIM_ICPOLARITY_RISING);//设置为上升沿捕获
-		HAL_TIM_IC_Start_IT(&htim4,TIM_CHANNEL_1);//开启定时器输入捕获
+		HAL_TIM_IC_Start_IT(&htim4,TIM_CHANNEL_1);//�??启定时器输入捕获
 		//d_values=0;
 		//test++;
 
@@ -186,6 +191,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim==&htim7)
 		{
 			test++;
+      printf("%d\n",test);
 			measure.ENCODERL_count=__HAL_TIM_GET_COUNTER(&htim5);
 			measure.ENCODERR_count=__HAL_TIM_GET_COUNTER(&htim3);
 			__HAL_TIM_SET_COUNTER(&htim5,0);
@@ -195,6 +201,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		}
 
 }
+int fputc(int ch,FILE *f)
+{
+   //HAL_UART_Transmit_DMA(&huart1,(uint8_t *)&ch,1);
+  HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,HAL_MAX_DELAY);
+  return ch;
+}
+
 /* USER CODE END 4 */
 
 /**

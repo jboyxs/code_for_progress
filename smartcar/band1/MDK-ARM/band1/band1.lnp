@@ -2,8 +2,10 @@
 "band1\startup_stm32f103xe.o"
 "band1\main.o"
 "band1\gpio.o"
+"band1\dma.o"
 "band1\i2c.o"
 "band1\tim.o"
+"band1\usart.o"
 "band1\stm32f1xx_it.o"
 "band1\stm32f1xx_hal_msp.o"
 "band1\stm32f1xx_hal_gpio_ex.o"
@@ -20,6 +22,7 @@
 "band1\stm32f1xx_hal_exti.o"
 "band1\stm32f1xx_hal_tim.o"
 "band1\stm32f1xx_hal_tim_ex.o"
+"band1\stm32f1xx_hal_uart.o"
 "band1\system_stm32f1xx.o"
 "band1\oled.o"
 "band1\oledfont.o"
@@ -29,7 +32,7 @@
 "band1\pid.o"
 "band1\motor.o"
 "band1\encoder.o"
---strict --scatter "band1\band1.sct"
+--library_type=microlib --strict --scatter "band1\band1.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "band1.map" -o band1\band1.axf

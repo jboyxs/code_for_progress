@@ -1,5 +1,6 @@
-band1/follow.o: ..\Peripheral\follow.c ..\Peripheral\follow.h \
-  ..\Core\Inc\main.h ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h \
+band1/stm32f1xx_hal_uart.o: \
+  ..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c \
+  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h \
   ..\Core\Inc\stm32f1xx_hal_conf.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h \

@@ -1,2 +1,4 @@
 Load "band1\\band1.axf" 
-Erase Done.Programming Done.Verify OK.Flash Load finished at 18:39:57
+No ST-LINK detected
+Error: Flash Download failed  -  Target DLL has been cancelled
+Flash Load finished at 17:07:05
