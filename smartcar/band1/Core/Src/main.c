@@ -31,6 +31,9 @@
 #include "motor.h"
 #include "encoder.h"
 #include "stdio.h"
+#include "redirect.h"
+#include "pid.h"
+#include "math.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,6 +58,9 @@ extern float distances;
 extern  uint8_t c_values;
 extern uint8_t test;
 extern ENCODER measure;
+extern PIDController motor_pid;
+float left_setpoint;
+float right_setpoint;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -127,6 +133,15 @@ ENCODER_init();
     OLED_ShowNum(7,6,test,5,16,0);
     RANGE_Alarm(RANGE_AcquireData());
     OLED_Showdecimal(60,6,measure.left_speed,2,2,16,0);
+    printf("%f\n",distances);//放在while循环中会对时序产生的影响比较小
+    //HAL_Delay(1000);
+   // printf("%d\n",test);
+    //HAL_UART_Transmit_DMA(&huart1,(uint8_t*)&distances,1);
+//float t1=0,t2=0;
+//t1 += 0.1;
+//t2 += 0.5;
+//printf("simples:%f, %f\n", sin(t1), sin(t2)); 		
+//HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
@@ -191,20 +206,23 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim==&htim7)
 		{
 			test++;
-      printf("%d\n",test);
+     // HAL_UART_Transmit_DMA(&huart1,(uint8_t*)&distances,1);//无法在串口调试助手中显示为10进制，只能显示为16进制
+      //printf("%f\n",distances);//会对时序产生很大的影响
+      //REDIRECT_printf("hello world\n");//感觉还是不可
 			measure.ENCODERL_count=__HAL_TIM_GET_COUNTER(&htim5);
 			measure.ENCODERR_count=__HAL_TIM_GET_COUNTER(&htim3);
 			__HAL_TIM_SET_COUNTER(&htim5,0);
 			__HAL_TIM_SET_COUNTER(&htim3,0);
 			measure.left_speed=(float)measure.ENCODERL_count*100/20/11/4;
 			measure.right_speed=(float)measure.ENCODERR_count*100/20/11/4;
+      //MOTOR_Speed((int8_t )PID_update(&motor_pid,left_setpoint,measure.left_speed),(int8_t)PID_update(&motor_pid,right_setpoint,measure.right_speed));
 		}
 
 }
 int fputc(int ch,FILE *f)
 {
    //HAL_UART_Transmit_DMA(&huart1,(uint8_t *)&ch,1);
-  HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,HAL_MAX_DELAY);
+  HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,0xFFFF);
   return ch;
 }
 

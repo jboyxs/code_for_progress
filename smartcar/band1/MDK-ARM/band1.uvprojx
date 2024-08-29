@@ -763,6 +763,16 @@
               <FileType>5</FileType>
               <FilePath>..\Peripheral\encoder.h</FilePath>
             </File>
+            <File>
+              <FileName>redirect.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Peripheral\redirect.c</FilePath>
+            </File>
+            <File>
+              <FileName>redirect.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Peripheral\redirect.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
