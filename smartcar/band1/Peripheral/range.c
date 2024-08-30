@@ -12,6 +12,11 @@
 
  ********************************************************************************************/
 float distances;
+float left_distance;//用于存储左右两侧的距离
+float right_distance;
+//声明一下全局变量，左右两边速度的设定值
+extern float left_setpoint;
+extern float right_setpoint;
 uint32_t t=0;
 uint32_t high_time[2]={0};
 uint8_t c_values=0;
@@ -118,5 +123,37 @@ void RANGE_Alarm(float distance)
 	else
 	{
 		OLED_ShowString(0,0,"safe     ",9,0);
+	}
+}
+void RANGE_avid(void)
+{
+	if(RANGE_AcquireData()>20)//安全距离，继续直行
+	{
+		SG90_middle();
+	}
+	else if(RANGE_AcquireData()<20)//距离过小开始检测左右距离；
+	{
+		SG90_left();
+		HAL_Delay(70);
+		left_distance=RANGE_AcquireData();
+		SG90_right();
+		HAL_Delay(70);
+		right_distance=RANGE_AcquireData();
+		if(left_distance<right_distance)
+		{
+			//右转
+			//left_setpoint=;
+			//right_setpoint=;
+			SG90_middle();
+			
+		}
+		else if(right_distance<left_distance)
+		{
+			//左转
+			//left_setpoint=;
+			//right_setpoint=;
+			SG90_middle();
+		}
+		
 	}
 }

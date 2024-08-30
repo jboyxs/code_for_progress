@@ -93,6 +93,8 @@ void Error_Handler(void);
 #define TX_GPIO_Port GPIOA
 #define RX_Pin GPIO_PIN_10
 #define RX_GPIO_Port GPIOA
+#define PWMSG_Pin GPIO_PIN_11
+#define PWMSG_GPIO_Port GPIOA
 #define PWMAL_Pin GPIO_PIN_15
 #define PWMAL_GPIO_Port GPIOA
 #define AIN1R_Pin GPIO_PIN_10

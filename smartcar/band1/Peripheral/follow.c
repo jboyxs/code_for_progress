@@ -1,6 +1,9 @@
 #include "follow.h"
 
 follow statu;
+//声明一下全局变量，左右两边速度的设定值
+extern float left_setpoint;
+extern float right_setpoint;
 void FOLLOW_Start(follow *state)
 {
     state->out0=HAL_GPIO_ReadPin(OUT1_GPIO_Port,OUT0_Pin);
@@ -13,36 +16,36 @@ void FOLLOW_Start(follow *state)
    if(!state->out0&&state->out1&&state->out2&&!state->out3)
    {
     //标准的直行，左右速度的值具体还要改
-    //state->left_speed=100;
-    //state->right_speed=100; 
+    //left_setpoint=100;
+    //right_setpoint=100; 
     state->nowstate=0;
    }
     else if(!state->out0&&!state->out1&&state->out2&&!state->out3)
     {
         //右小转，左右速度的值具体还要改
-        //state->left_speed=100;
-        //state->right_speed=50;
+        //left_setpoint=100;
+        //right_setpoint=50;
         state->nowstate=1;
     }
     else if(!state->out0&&!state->out1&&!state->out2&&state->out3)
     {
         //右大转，左右速度的值具体还要改
-        //state->left_speed=;
-        //state->right_speed=;
+        //left_setpoint=;
+        //right_setpoint=;
         state->nowstate=2;
     }
     else if(!state->out0&&state->out1&&!state->out2&&!state->out3)
     {
         //左小转，左右速度的值具体还要改
-        //state->left_speed=50;
-        //state->right_speed=100;
+        //left_setpoint=50;
+        //right_setpoint=100;
         state->nowstate=3;
     }
     else if(state->out0&&!state->out1&&!state->out2&&!state->out3)
     {
         //左大转，左右速度的值具体还要改
-        //state->left_speed=50;
-        //state->right_speed=50;
+        //left_setpoint=50;
+        //right_setpoint=50;
         state->nowstate=4;
     }
     if(!state->out0&&!state->out1&&state->out2&&!state->out3)
@@ -51,16 +54,16 @@ void FOLLOW_Start(follow *state)
         {
             //上一个状态是右小转
             //右小中转，左右速度的值具体还要改
-            //state->left_speed=100;
-            //state->right_speed=50;
+            //left_setpoint=100;
+            //right_setpoint=50;
             state->nowstate=5;
         }
         else if(state->laststate==3)
         {
             //上一个状态是左小转
             //左小中转，左右速度的值具体还要改
-            //state->left_speed=50;
-            //state->right_speed=100;
+            //left_setpoint=50;
+            //right_setpoint=100;
             state->nowstate=6;
         }
     }

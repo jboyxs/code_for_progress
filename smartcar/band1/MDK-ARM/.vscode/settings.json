@@ -2,6 +2,7 @@
     "files.associations": {
         "pid.h": "c",
         "dma.h": "c",
-        "motor.h": "c"
+        "motor.h": "c",
+        "range.h": "c"
     }
 }

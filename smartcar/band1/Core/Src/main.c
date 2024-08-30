@@ -111,6 +111,7 @@ OLED_Init(&hi2c1);
   MX_TIM5_Init();
   MX_TIM7_Init();
   MX_USART1_UART_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 OLED_Clear();
 OLED_Display_On();
@@ -133,7 +134,7 @@ ENCODER_init();
     OLED_ShowNum(7,6,test,5,16,0);
     RANGE_Alarm(RANGE_AcquireData());
     OLED_Showdecimal(60,6,measure.left_speed,2,2,16,0);
-    printf("%f\n",distances);//放在while循环中会对时序产生的影响比较小
+    printf("%f\n",distances);//放在while循环中会对时序产生的影响比较�?
     //HAL_Delay(1000);
    // printf("%d\n",test);
     //HAL_UART_Transmit_DMA(&huart1,(uint8_t*)&distances,1);
@@ -194,11 +195,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim==&htim6)                      //判断是否为TIM3溢出中断
 	{
 		TRIG_OFF;                         //先将超声波模块SR04的发送端TRIG拉低
-		TRIG_ON;                          //再将超声波模块SR04的发送端TRIG拉高，并且持�??20ms后再拉低
+		TRIG_ON;                          //再将超声波模块SR04的发送端TRIG拉高，并且持�???20ms后再拉低
 		delay_us(20);
 		TRIG_OFF;
 		__HAL_TIM_SET_CAPTUREPOLARITY(&htim4,TIM_CHANNEL_1,TIM_ICPOLARITY_RISING);//设置为上升沿捕获
-		HAL_TIM_IC_Start_IT(&htim4,TIM_CHANNEL_1);//�??启定时器输入捕获
+		HAL_TIM_IC_Start_IT(&htim4,TIM_CHANNEL_1);//�???启定时器输入捕获
 		//d_values=0;
 		//test++;
 
@@ -206,8 +207,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim==&htim7)
 		{
 			test++;
-     // HAL_UART_Transmit_DMA(&huart1,(uint8_t*)&distances,1);//无法在串口调试助手中显示为10进制，只能显示为16进制
-      //printf("%f\n",distances);//会对时序产生很大的影响
+     // HAL_UART_Transmit_DMA(&huart1,(uint8_t*)&distances,1);//无法在串口调试助手中显示�?10进制，只能显示为16进制
+      //printf("%f\n",distances);//会对时序产生很大的影�?
       //REDIRECT_printf("hello world\n");//感觉还是不可
 			measure.ENCODERL_count=__HAL_TIM_GET_COUNTER(&htim5);
 			measure.ENCODERR_count=__HAL_TIM_GET_COUNTER(&htim3);
