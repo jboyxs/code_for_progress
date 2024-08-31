@@ -125,7 +125,7 @@ void RANGE_Alarm(float distance)
 		OLED_ShowString(0,0,"safe     ",9,0);
 	}
 }
-void RANGE_avid(void)
+void RANGE_avoid(void)//放到while循环里面，通过定时中断改变速度
 {
 	if(RANGE_AcquireData()>20)//安全距离，继续直行
 	{
