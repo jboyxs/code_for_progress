@@ -133,13 +133,16 @@ SG90_init();
 
     /* USER CODE BEGIN 3 */
     //OLED_Showdecimal(12,0,distances,2,2,16,0);
-    OLED_Showdecimal(0,4,RANGE_AcquireData(),2,2,16,0);
-    OLED_ShowNum(7,6,test,5,16,0);
-    RANGE_Alarm(RANGE_AcquireData());
-    OLED_Showdecimal(60,6,measure.left_speed,2,2,16,0);
-    printf("%f\n",distances);//放在while循环中会对时序产生的影响比较�?
+    //OLED_Showdecimal(0,4,RANGE_AcquireData(),2,2,16,0);
+    //OLED_ShowNum(7,6,test,5,16,0);
+    //RANGE_Alarm(RANGE_AcquireData());
+    //OLED_Showdecimal(60,6,measure.left_speed,2,2,16,0);
+    //__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,500);
+    //__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_4,500);
+    printf("%f\n",measure.right_speed);
+    //printf("%d\n",test);//放在while循环中会对时序产生的影响比较�?
     //RANGE_avoid();
-    FOLLOW_Start(&statu);
+    //FOLLOW_Start(&statu);
     //HAL_Delay(1000);
    // printf("%d\n",test);
     //HAL_UART_Transmit_DMA(&huart1,(uint8_t*)&distances,1);
@@ -222,6 +225,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			measure.left_speed=(float)measure.ENCODERL_count*100/20/11/4;
 			measure.right_speed=(float)measure.ENCODERR_count*100/20/11/4;
       //位置PID
+     // test++;
+      MOTOR_Speed(7,500);
       //MOTOR_Speed((int8_t )PID_update(&motor_pid,left_setpoint,measure.left_speed),(int8_t)PID_update(&motor_pid,right_setpoint,measure.right_speed));
 		}
 
