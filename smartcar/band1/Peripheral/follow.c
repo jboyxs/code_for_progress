@@ -16,36 +16,36 @@ void FOLLOW_Start(follow *state)
    if(!state->out0&&state->out1&&state->out2&&!state->out3)
    {
     //标准的直行，左右速度的值具体还要改
-    //left_setpoint=100;
-    //right_setpoint=100; 
+    left_setpoint=5;
+    right_setpoint=5; 
     state->nowstate=0;
    }
     else if(!state->out0&&!state->out1&&state->out2&&!state->out3)
     {
         //右小转，左右速度的值具体还要改
-        //left_setpoint=100;
-        //right_setpoint=50;
+        left_setpoint=5;
+        right_setpoint=4;
         state->nowstate=1;
     }
     else if(!state->out0&&!state->out1&&!state->out2&&state->out3)
     {
         //右大转，左右速度的值具体还要改
-        //left_setpoint=;
-        //right_setpoint=;
+        left_setpoint=5;
+        right_setpoint=2;
         state->nowstate=2;
     }
     else if(!state->out0&&state->out1&&!state->out2&&!state->out3)
     {
         //左小转，左右速度的值具体还要改
-        //left_setpoint=50;
-        //right_setpoint=100;
+        left_setpoint=4;
+        right_setpoint=5;
         state->nowstate=3;
     }
     else if(state->out0&&!state->out1&&!state->out2&&!state->out3)
     {
         //左大转，左右速度的值具体还要改
-        //left_setpoint=50;
-        //right_setpoint=50;
+        left_setpoint=2;
+        right_setpoint=5;
         state->nowstate=4;
     }
     if(!state->out0&&!state->out1&&state->out2&&!state->out3)
@@ -54,16 +54,16 @@ void FOLLOW_Start(follow *state)
         {
             //上一个状态是右小转
             //右小中转，左右速度的值具体还要改
-            //left_setpoint=100;
-            //right_setpoint=50;
+            left_setpoint=5;
+            right_setpoint=3;
             state->nowstate=5;
         }
         else if(state->laststate==3)
         {
             //上一个状态是左小转
             //左小中转，左右速度的值具体还要改
-            //left_setpoint=50;
-            //right_setpoint=100;
+            left_setpoint=3;
+            right_setpoint=5;
             state->nowstate=6;
         }
     }

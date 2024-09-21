@@ -21,5 +21,5 @@
 #define BIN2R_HIGH() HAL_GPIO_WritePin(BIN2R_GPIO_Port,BIN2R_Pin,GPIO_PIN_SET)
 #define BIN2R_LOW() HAL_GPIO_WritePin(BIN2R_GPIO_Port,BIN2R_Pin,GPIO_PIN_RESET)
 void MOTOR_init(void);
-void MOTOR_Speed(int8_t left_speed, int8_t right_speed);
+void MOTOR_Speed(int left_speed, int right_speed);
 #endif //MOTOR_H

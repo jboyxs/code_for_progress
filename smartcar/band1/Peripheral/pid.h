@@ -22,5 +22,6 @@ typedef struct{
 } PIDController;
 
 float PID_update(PIDController *pid, float setpoint, float measurement);
+void PID_init(void);
 
 #endif /* PID_H */

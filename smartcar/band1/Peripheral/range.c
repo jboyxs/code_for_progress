@@ -127,31 +127,34 @@ void RANGE_Alarm(float distance)
 }
 void RANGE_avoid(void)//放到while循环里面，通过定时中断改变速度
 {
-	if(RANGE_AcquireData()>20)//安全距离，继续直行
+	if(RANGE_AcquireData()>50)//安全距离，继续直行
 	{
 		SG90_middle();
+		left_setpoint=5;
+		right_setpoint=5;
 	}
-	else if(RANGE_AcquireData()<20)//距离过小开始检测左右距离；
+	else if(RANGE_AcquireData()<50)//距离过小开始检测左右距离；
 	{
 		SG90_left();
-		HAL_Delay(70);
+		HAL_Delay(1000);
 		left_distance=RANGE_AcquireData();
 		SG90_right();
-		HAL_Delay(70);
+		HAL_Delay(1000);
 		right_distance=RANGE_AcquireData();
 		if(left_distance<right_distance)
 		{
 			//右转
-			//left_setpoint=;
-			//right_setpoint=;
+			//
+			left_setpoint=7;
+			right_setpoint=5;
 			SG90_middle();
 			
 		}
 		else if(right_distance<left_distance)
 		{
 			//左转
-			//left_setpoint=;
-			//right_setpoint=;
+			left_setpoint=5;
+			right_setpoint=7;
 			SG90_middle();
 		}
 		

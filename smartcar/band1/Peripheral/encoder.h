@@ -5,8 +5,8 @@
 #include "tim.h"
 typedef struct 
 {
-    uint8_t ENCODERL_count;
-    uint8_t ENCODERR_count;
+    short ENCODERL_count;
+    short ENCODERR_count;
     float left_speed;
     float right_speed;
 } ENCODER;

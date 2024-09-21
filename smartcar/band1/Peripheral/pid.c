@@ -1,7 +1,19 @@
 #include "pid.h"
 PIDController motor_pid;// create a PIDController object for motorspeed control
 
-
+void PID_init(void)
+{
+    motor_pid.Kd=0;
+    motor_pid.Ki=0.7;
+    motor_pid.Kp=570;
+    motor_pid.limMax=700;
+    motor_pid.limMin=200;
+  //  motor_pid.integrator=0;
+    motor_pid.limMaxInt=100;
+    motor_pid.limMinInt=0;
+    motor_pid.differentiator=0;
+    motor_pid.T=0.002;
+}
 float PID_update(PIDController *pid, float setpoint, float measurement) {
 
 	/*
@@ -37,9 +49,9 @@ float PID_update(PIDController *pid, float setpoint, float measurement) {
 	* Derivative (band-limited differentiator)
 	*/
 		
-    pid->differentiator = -(2.0f * pid->Kd * (measurement - pid->prevMeasurement)	/* Note: derivative on measurement, therefore minus sign in front of equation! */
-                        + (2.0f * pid->tau - pid->T) * pid->differentiator)
-                        / (2.0f * pid->tau + pid->T);
+   // pid->differentiator = -(2.0f * pid->Kd * (measurement - pid->prevMeasurement)	/* Note: derivative on measurement, therefore minus sign in front of equation! */
+                       // + (2.0f * pid->tau - pid->T) * pid->differentiator)
+    //                    / (2.0f * pid->tau + pid->T);
 
 
 	/*

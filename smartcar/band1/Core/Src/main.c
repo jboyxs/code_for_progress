@@ -27,7 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "oled.h"
-#include "range.h"//测距和避障
+#include "range.h"//测距和避�?
 #include "follow.h"//循迹
 #include "motor.h"//速度pid
 #include "encoder.h"
@@ -60,7 +60,7 @@ extern  uint8_t c_values;
 extern uint8_t test;
 extern ENCODER measure;
 extern PIDController motor_pid;
-extern follow statu;//循迹函数的参数，里面有各个传感器的状态
+extern follow statu;//循迹函数的参数，里面有各个传感器的状�?
 float left_setpoint;
 float right_setpoint;
 /* USER CODE END PV */
@@ -117,10 +117,13 @@ OLED_Init(&hi2c1);
   /* USER CODE BEGIN 2 */
 OLED_Clear();
 OLED_Display_On();
-HAL_TIM_Base_Start_IT(&htim6);//测距的时钟
+HAL_TIM_Base_Start_IT(&htim6);//测距的时�?
 MOTOR_init();
 ENCODER_init();
 SG90_init();
+PID_init();//先调节P参数
+//left_setpoint=5;
+//right_setpoint=5;
 //OLED_ShowString(0,6,"test",4,0);
 //OLED_ShowString(0,0,"Distance: ",9,0);
   /* USER CODE END 2 */
@@ -139,8 +142,13 @@ SG90_init();
     //OLED_Showdecimal(60,6,measure.left_speed,2,2,16,0);
     //__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,500);
     //__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_4,500);
-    printf("%f\n",measure.right_speed);
-    //printf("%d\n",test);//放在while循环中会对时序产生的影响比较�?
+   // printf("%f\n",measure.left_speed);
+    //printf("%f\n",measure.left_speed);
+    //RANGE_avoid();
+    FOLLOW_Start(&statu);
+    //SG90_right();
+   //printf("%f\n",motor_pid.out);
+    //printf("%d\n",test);//放在while循环中会对时序产生的影响比较�??
     //RANGE_avoid();
     //FOLLOW_Start(&statu);
     //HAL_Delay(1000);
@@ -203,31 +211,32 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim==&htim6)                      //判断是否为TIM3溢出中断
 	{
 		TRIG_OFF;                         //先将超声波模块SR04的发送端TRIG拉低
-		TRIG_ON;                          //再将超声波模块SR04的发送端TRIG拉高，并且持�???20ms后再拉低
+		TRIG_ON;                          //再将超声波模块SR04的发送端TRIG拉高，并且持�????20ms后再拉低
 		delay_us(20);
 		TRIG_OFF;
 		__HAL_TIM_SET_CAPTUREPOLARITY(&htim4,TIM_CHANNEL_1,TIM_ICPOLARITY_RISING);//设置为上升沿捕获
-		HAL_TIM_IC_Start_IT(&htim4,TIM_CHANNEL_1);//�???启定时器输入捕获
+		HAL_TIM_IC_Start_IT(&htim4,TIM_CHANNEL_1);//�????启定时器输入捕获
 		//d_values=0;
 		//test++;
 
 	}
 	if(htim==&htim7)
 		{
-			test++;
-     // HAL_UART_Transmit_DMA(&huart1,(uint8_t*)&distances,1);//无法在串口调试助手中显示�?10进制，只能显示为16进制
-      //printf("%f\n",distances);//会对时序产生很大的影�?
+			//test++;
+     // HAL_UART_Transmit_DMA(&huart1,(uint8_t*)&distances,1);//无法在串口调试助手中显示�??10进制，只能显示为16进制
+      //printf("%f\n",distances);//会对时序产生很大的影�??
       //REDIRECT_printf("hello world\n");//感觉还是不可
-			measure.ENCODERL_count=__HAL_TIM_GET_COUNTER(&htim5);
-			measure.ENCODERR_count=__HAL_TIM_GET_COUNTER(&htim3);
+			measure.ENCODERL_count=(short)__HAL_TIM_GET_COUNTER(&htim5);
+			measure.ENCODERR_count=(short)__HAL_TIM_GET_COUNTER(&htim3);
+      measure.ENCODERR_count=-measure.ENCODERR_count;
 			__HAL_TIM_SET_COUNTER(&htim5,0);
 			__HAL_TIM_SET_COUNTER(&htim3,0);
 			measure.left_speed=(float)measure.ENCODERL_count*100/20/11/4;
 			measure.right_speed=(float)measure.ENCODERR_count*100/20/11/4;
       //位置PID
      // test++;
-      MOTOR_Speed(7,500);
-      //MOTOR_Speed((int8_t )PID_update(&motor_pid,left_setpoint,measure.left_speed),(int8_t)PID_update(&motor_pid,right_setpoint,measure.right_speed));
+      //MOTOR_Speed(0,800);
+      MOTOR_Speed((int )PID_update(&motor_pid,left_setpoint,measure.left_speed),(int)PID_update(&motor_pid,right_setpoint,measure.right_speed));
 		}
 
 }
